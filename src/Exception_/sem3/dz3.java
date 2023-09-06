@@ -8,41 +8,41 @@ public class dz3 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Введите данные в формате: Фамилия Имя Отчество НомерТелефона");
+        System.out.println("Р’РІРµРґРёС‚Рµ РґР°РЅРЅС‹Рµ РІ С„РѕСЂРјР°С‚Рµ: Р¤Р°РјРёР»РёСЏ РРјСЏ РћС‚С‡РµСЃС‚РІРѕ РќРѕРјРµСЂРўРµР»РµС„РѕРЅР°");
 
         try {
             String input = scanner.nextLine();
             String[] data = input.split(" ");
 
             if (data.length != 4) {
-                throw new InvalidDataFormatException("Неверное количество данных. Ожидается Фамилия Имя Отчество НомерТелефона.");
+                throw new InvalidDataFormatException("РќРµРІРµСЂРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РґР°РЅРЅС‹С…. РћР¶РёРґР°РµС‚СЃСЏ Р¤Р°РјРёР»РёСЏ РРјСЏ РћС‚С‡РµСЃС‚РІРѕ РќРѕРјРµСЂРўРµР»РµС„РѕРЅР°.");
             }
 
             String lastName = data[0];
             String firstName = data[1];
             String middleName = data[2];
 
-            // Проверка, что фамилия и имя не содержат цифр
+            // РџСЂРѕРІРµСЂРєР°, С‡С‚Рѕ С„Р°РјРёР»РёСЏ Рё РёРјСЏ РЅРµ СЃРѕРґРµСЂР¶Р°С‚ С†РёС„СЂ
             if (containsDigits(lastName) || containsDigits(firstName) || containsDigits(middleName)) {
-                throw new InvalidDataFormatException("ФИО не должны содержать цифр.");
+                throw new InvalidDataFormatException("Р¤РРћ РЅРµ РґРѕР»Р¶РЅС‹ СЃРѕРґРµСЂР¶Р°С‚СЊ С†РёС„СЂ.");
             }
 
             long phoneNumber;
             try {
                 phoneNumber = Long.parseLong(data[3]);
             } catch (NumberFormatException e) {
-                throw new InvalidDataFormatException("Неверный формат номера телефона. Номер должен быть целым числом.");
+                throw new InvalidDataFormatException("РќРµРІРµСЂРЅС‹Р№ С„РѕСЂРјР°С‚ РЅРѕРјРµСЂР° С‚РµР»РµС„РѕРЅР°. РќРѕРјРµСЂ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ С†РµР»С‹Рј С‡РёСЃР»РѕРј.");
             }
 
             try (FileWriter writer = new FileWriter(lastName + ".txt", true)) {
                 writer.write(lastName + " " + firstName + " " + middleName + " " + phoneNumber + "\n");
-                System.out.println("Данные успешно записаны в файл.");
+                System.out.println("Р”Р°РЅРЅС‹Рµ СѓСЃРїРµС€РЅРѕ Р·Р°РїРёСЃР°РЅС‹ РІ С„Р°Р№Р».");
             } catch (IOException e) {
-                System.err.println("Произошла ошибка при записи в файл: " + e.getMessage());
+                System.err.println("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё Р·Р°РїРёСЃРё РІ С„Р°Р№Р»: " + e.getMessage());
             }
 
         } catch (InvalidDataFormatException e) {
-            System.err.println("Ошибка: " + e.getMessage());
+            System.err.println("РћС€РёР±РєР°: " + e.getMessage());
         } finally {
             scanner.close();
         }
